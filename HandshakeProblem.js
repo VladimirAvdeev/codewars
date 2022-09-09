@@ -1,30 +1,32 @@
 function getParticipants(handshakes){
-    let maxHndShk = handshakes * 2;
-    let maxPpl = [];
-    let pairs = [];
-    for (let i = 1; i <= maxHndShk; i++){
-        maxPpl.push(i);
+    let counter = 0;
+    while (handshakes > 0){
+        console.log(counter);
+        handshakes -= counter;
+        counter++;
+        console.log('hand' + handshakes);
     }
-    //console.log(maxPpl);
-    for (let i = 0; i <= handshakes; i++){
-        if(maxPpl.indexOf(maxPpl[i]) != 0){
-            let j = i;
-            while(j>=1 && handshakes != pairs.length){
-                let arr = [];
-                arr.push(maxPpl[i-j]);
-                arr.push(maxPpl[i]);
-                pairs.push(arr);
-                j--;
-            }
-        }
-    }
-    //console.log(pairs);
-    //console.log(pairs.length);
-    //console.log(pairs.flat().pop());
-    if (pairs.flat().pop()) {
-        return pairs.flat().pop();
-    }else return 0;
-  }
+    return counter;
+}
 
-  console.log(getParticipants(100000));
-  
+console.log(getParticipants(20));
+
+  // 1 = [1,2] 2                                         1 2                     0+0=0 0+1=1 0+1+2=3 0+1+2+3=6  0+1+2+3+4=10  0+1+2+3+4+5=15 0+1+2+3+4+5+6=21  n+(n+1) 
+  // 2 = [1,2] [1,3] 3                                   11 2 3                  3 = 3-1 2 пара
+  // 3 = [1,2] [1,3] [2,3] 3                             11 22 33                   1-1 = 0 (1+1 = 2) 2-1=1-2=-1(2+1 = 3) 3-1=2-2=0(2+1 =3) 9-1=8-2=6-3=3-4=-1(4+1=5)
+  // 4 = [1,2] [2,3] [3,1] [4,1] 4                       111 22  33 4           массив размером handshakes*2
+  // 5 = [1,2] [2,3] [3,1] [4,1] [4,2] 4                 111 222 33 44
+  // 6 = [1,2] [2,3] [3,1] [4,1] [4,2] [4,3] 4           111 222 333 444
+  // 7 = [1,2] [2,3] [3,1] [4,1] [4,2] [4,3] [5,1] 5     1111 222 333 444 5 с каждой новой цифрой n добавляется n-1 пар
+  // 8 = 5
+  // 9 = 5
+  // 10 = 5                                              1111 2222 3333 4444 5555
+  // 11 = 6                                              11111 22222 33333 44444 55555 66666
+
+
+  // Число людей образующих пары всегда равно handshakes*2
+  // потом я заметил что количество рукопожатий изменяется на количество необходимых людей-1
+  // точнее разница между минимальным количеством рукопожатий и максимальным с одним и тем же количеством людей равна количество людей-1
+  // точнее разница между максимальным количеством рукопожатий и предыдущим максимальным на количество-1
+  // т.е. 4 уникальных человека дадут максимально минимальное количество рукопожатий = 6
+  // 
