@@ -1,13 +1,20 @@
 function getLengthOfMissingArray(arrayOfArrays) {
-    let sortedArr = arrayOfArrays.sort();
-    console.log(sortedArr);
-    for(let i=0; i<sortedArr.length;i++){
-        if ((sortedArr[i+1].length - sortedArr[i].length) > 2){
-            console.log(sortedArr[i].length + 1);
-            return sortedArr[i].length + 1;
-        }
-    }
+    if (arrayOfArrays != null){
+        if(arrayOfArrays.length > 1){
+            let arrOfLength = arrayOfArrays.map(value=>{
+                return (value!=null) ? value.length : 0;
+            }).sort((a,b)=>a-b);
+            if(!arrOfLength.some(value=>value == 0)){
+                for(let i = 0; i < arrOfLength.length; i++){
+                    if(arrOfLength[i+1] - arrOfLength[i] != 1){
+                        return arrOfLength[i]+1;
+                    }
+                }
+            }else return 0;
+        }else return 0;
+    }else return 0;
 }
 
-getLengthOfMissingArray([ [ 1, 2 ], [ 4, 5, 1, 1 ], [ 1 ], [ 5, 6, 7, 8, 9 ]] );
+console.log(null == null);
+console.log(getLengthOfMissingArray(null));
   
