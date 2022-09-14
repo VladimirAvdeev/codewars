@@ -1,6 +1,14 @@
 function recycle(array) {
+    const recycle = ['paper', 'glass', 'organic', 'plastic'];
     let result = [[],[],[],[]];
-    console.log(result);
+    for (let i = 0; i < recycle.length; i++){
+        for (obj of array){
+            if (obj.material === recycle[i] || obj.secondMaterial === recycle[i]){
+                result[i].push(obj.type);
+            }
+        }
+    }
+    return result;
 }
 
 console.log(recycle([
